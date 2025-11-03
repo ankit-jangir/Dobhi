@@ -121,6 +121,20 @@
     color: #3B3B3B;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 14px; /* Mobile default */
+  }
+
+  /* Responsive font sizes for body */
+  @media (min-width: 640px) {
+    body {
+      font-size: 15px; /* Tablet */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      font-size: 16px; /* Desktop */
+    }
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -128,9 +142,143 @@
     font-weight: 700;
     color: #3B3B3B;
   }
+
+  /* Responsive heading sizes */
+  h1 {
+    font-size: 1.75rem; /* Mobile: 28px */
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Mobile: 24px */
+  }
+
+  h3 {
+    font-size: 1.25rem; /* Mobile: 20px */
+  }
+
+  h4 {
+    font-size: 1.125rem; /* Mobile: 18px */
+  }
+
+  h5, h6 {
+    font-size: 1rem; /* Mobile: 16px */
+  }
+
+  @media (min-width: 640px) {
+    h1 {
+      font-size: 2rem; /* Tablet: 32px */
+    }
+    h2 {
+      font-size: 1.75rem; /* Tablet: 28px */
+    }
+    h3 {
+      font-size: 1.5rem; /* Tablet: 24px */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 2.25rem; /* Desktop: 36px */
+    }
+    h2 {
+      font-size: 2rem; /* Desktop: 32px */
+    }
+    h3 {
+      font-size: 1.75rem; /* Desktop: 28px */
+    }
+  }
   
   /* Tailwind font utilities */
   .font-inter {
     font-family: 'Inter', sans-serif;
+  }
+
+  /* Smooth Scrolling for Mobile/Tablet */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar on mobile and tablet */
+  @media (max-width: 1023px) {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  }
+
+  /* Custom Dobhi Scrollbar - Beautiful & Unique (Desktop Only) */
+  @media (min-width: 1024px) {
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
+      border-radius: 10px;
+      margin: 4px 0;
+      box-shadow: inset 0 0 6px rgba(59, 130, 246, 0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+      border-radius: 10px;
+      box-shadow: 
+        0 2px 8px rgba(59, 130, 246, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+      box-shadow: 
+        0 4px 12px rgba(59, 130, 246, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      transform: scale(1.05);
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+      background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 50%, #1e3a8a 100%);
+      box-shadow: 
+        0 2px 6px rgba(59, 130, 246, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    }
+
+    /* Corner styling */
+    ::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    /* Firefox Scrollbar - Beautiful & Unique */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #3b82f6 #e0f2fe;
+    }
+
+    /* Custom animation for scroll thumb */
+    @keyframes scrollGlow {
+      0%, 100% {
+        filter: brightness(1);
+      }
+      50% {
+        filter: brightness(1.1);
+      }
+    }
+
+    ::-webkit-scrollbar-thumb {
+      animation: scrollGlow 3s ease-in-out infinite;
+    }
   }
 }

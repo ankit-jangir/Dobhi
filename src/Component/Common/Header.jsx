@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Button } from '../../components/ui/button'
-import { Menu, X, User } from 'lucide-react'
+import { Menu, X, User, MapPin, ChevronDown } from 'lucide-react'
 import headerLogo from '../../assets/logo/headerlogo.png'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isLocationOpen, setIsLocationOpen] = useState(false)
+  const [selectedLocation, setSelectedLocation] = useState('Jaipur')
+  const locationRef = useRef(null)
 
   const navigation = [
     { name: 'Home', path: '/' },
@@ -16,18 +19,87 @@ const Header = () => {
     { name: 'Contact', path: '/Contact' },
   ]
 
+  const locations = [
+    { name: 'Jaipur', state: 'Rajasthan' },
+    { name: 'Delhi', state: 'Delhi' },
+    { name: 'Mumbai', state: 'Maharashtra' },
+    { name: 'Bangalore', state: 'Karnataka' },
+    { name: 'Hyderabad', state: 'Telangana' },
+    { name: 'Chennai', state: 'Tamil Nadu' },
+    { name: 'Kolkata', state: 'West Bengal' },
+    { name: 'Pune', state: 'Maharashtra' },
+    { name: 'Ahmedabad', state: 'Gujarat' },
+    { name: 'Surat', state: 'Gujarat' },
+    { name: 'Lucknow', state: 'Uttar Pradesh' },
+    { name: 'Kanpur', state: 'Uttar Pradesh' },
+  ]
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (locationRef.current && !locationRef.current.contains(event.target)) {
+        setIsLocationOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const handleLocationSelect = (location) => {
+    setSelectedLocation(location)
+    setIsLocationOpen(false)
+  }
+
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-16 items-center justify-between gap-4">
           {/* Logo */}
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center flex-shrink-0">
             <img 
               src={headerLogo} 
               alt="Dobhi Premium Laundry" 
-              className="h-30 w-auto"
+              className="h-10 w-auto"
             />
           </Link>
+
+          {/* Location Selector - Desktop */}
+          <div className="hidden md:block relative" ref={locationRef}>
+            <button
+              onClick={() => setIsLocationOpen(!isLocationOpen)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors border border-gray-200"
+            >
+              <MapPin className="w-4 h-4 text-blue-500" />
+              <span className="text-sm font-medium text-gray-700">{selectedLocation}</span>
+              <ChevronDown className={`w-4 h-4 text-gray-500 transition-transform ${isLocationOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {/* Location Dropdown */}
+            {isLocationOpen && (
+              <div className="absolute top-full mt-2 left-0 w-64 bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto z-50">
+                <div className="p-2">
+                  <p className="text-xs font-semibold text-gray-500 uppercase px-3 py-2">Select Location</p>
+                  {locations.map((location) => (
+                    <button
+                      key={location.name}
+                      onClick={() => handleLocationSelect(location.name)}
+                      className={`w-full text-left px-3 py-2 rounded-md hover:bg-blue-50 transition-colors ${
+                        selectedLocation === location.name ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4" />
+                        <div>
+                          <p className="text-sm font-medium">{location.name}</p>
+                          <p className="text-xs text-gray-500">{location.state}</p>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
@@ -72,6 +144,22 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col gap-4">
+              {/* Mobile Location Selector */}
+              <div className="pb-4 border-b border-gray-200">
+                <p className="text-xs font-semibold text-gray-500 uppercase mb-2">Location</p>
+                <select
+                  value={selectedLocation}
+                  onChange={(e) => setSelectedLocation(e.target.value)}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  {locations.map((location) => (
+                    <option key={location.name} value={location.name}>
+                      {location.name}, {location.state}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               {navigation.map((item) => (
                 <NavLink
                   key={item.name}
