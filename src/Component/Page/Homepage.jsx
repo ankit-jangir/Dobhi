@@ -99,14 +99,14 @@ const Home = () => {
           
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-5 md:mb-6">
             {/* Email Button */}
-            <a
-              href={`mailto:support@dobhi.in?subject=Inquiry about Dobhi Laundry Services`}
-              className="group flex items-center gap-2 md:gap-2.5 px-5 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3.5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg md:rounded-xl font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 w-full sm:w-auto justify-center text-xs sm:text-sm md:text-base animate-button-hover"
-              style={{ fontWeight: 500 }}
-            >
-              <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 group-hover:animate-bounce" />
-              <span>support@dobhi.in</span>
-            </a>
+         <a
+  href="mailto:support@dobhi.in?subject=Inquiry%20about%20Dobhi%20Laundry%20Services"
+  className="group flex items-center gap-2 md:gap-2.5 px-5 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3.5 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg md:rounded-xl font-medium shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 w-full sm:w-auto justify-center text-xs sm:text-sm md:text-base animate-button-hover"
+>
+  <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 group-hover:animate-bounce" />
+  <span>support@dobhi.in</span>
+</a>
+
 
             {/* WhatsApp Button */}
             <a
