@@ -78,7 +78,6 @@ const Home = () => {
             })}
           </div>
 
-          {/* Highlight Box */}
           <div className="mt-5 md:mt-8 p-4 sm:p-5 md:p-6 lg:p-8 bg-gradient-to-r from-blue-600 via-cyan-600 to-indigo-600 rounded-xl md:rounded-2xl text-white text-center shadow-xl transform hover:scale-105 transition-transform duration-300">
             <h3 className="text-sm sm:text-base md:text-xl lg:text-2xl font-medium mb-2 md:mb-3" style={{ fontFamily: "'Inter', sans-serif", fontWeight: 500 }}>
               ⚡ Fast. Affordable. Premium.
